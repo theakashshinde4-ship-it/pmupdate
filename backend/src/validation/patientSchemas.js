@@ -1,0 +1,66 @@
+const Joi = require('joi');
+
+const basePatient = {
+  patient_id: Joi.string().alphanum().min(2).max(50),
+  name: Joi.string().min(1).max(255),
+  email: Joi.string().email().allow('', null),
+  phone: Joi.string().pattern(/^\d{10}$/).allow('', null),
+  dob: Joi.string().pattern(/^\d{4}-\d{2}-\d{2}$/).allow('', null),
+  gender: Joi.string().valid('M', 'F', 'Male', 'Female', 'Other').allow(null),
+  blood_group: Joi.string().max(5).allow('', null),
+  address: Joi.string().allow('', null),
+  city: Joi.string().allow('', null),
+  state: Joi.string().allow('', null),
+  pincode: Joi.string().allow('', null),
+  emergency_contact_name: Joi.string().allow('', null),
+  emergency_contact_phone: Joi.string().pattern(/^\d{10}$/).allow('', null),
+  medical_conditions: Joi.string().allow('', null),
+  allergies: Joi.string().allow('', null),
+  current_medications: Joi.string().allow('', null),
+  is_vip: Joi.boolean().optional(),
+  vip_tier: Joi.string().valid('Bronze','Silver','Gold','Platinum').allow(null),
+};
+
+const createPatient = Joi.object({
+  patient_id: basePatient.patient_id.optional(),
+  name: basePatient.name.required(),
+  email: basePatient.email,
+  phone: basePatient.phone,
+  dob: basePatient.dob,
+  gender: basePatient.gender,
+  blood_group: basePatient.blood_group,
+  address: basePatient.address,
+  city: basePatient.city,
+  state: basePatient.state,
+  pincode: basePatient.pincode,
+  emergency_contact_name: basePatient.emergency_contact_name,
+  emergency_contact_phone: basePatient.emergency_contact_phone,
+  medical_conditions: basePatient.medical_conditions,
+  allergies: basePatient.allergies,
+  current_medications: basePatient.current_medications,
+  is_vip: basePatient.is_vip,
+  vip_tier: basePatient.vip_tier,
+});
+
+const updatePatient = Joi.object({
+  patient_id: basePatient.patient_id.optional(),
+  name: basePatient.name.optional(),
+  email: basePatient.email,
+  phone: basePatient.phone,
+  dob: basePatient.dob,
+  gender: basePatient.gender,
+  blood_group: basePatient.blood_group,
+  address: basePatient.address,
+  city: basePatient.city,
+  state: basePatient.state,
+  pincode: basePatient.pincode,
+  emergency_contact_name: basePatient.emergency_contact_name,
+  emergency_contact_phone: basePatient.emergency_contact_phone,
+  medical_conditions: basePatient.medical_conditions,
+  allergies: basePatient.allergies,
+  current_medications: basePatient.current_medications,
+  is_vip: basePatient.is_vip,
+  vip_tier: basePatient.vip_tier,
+});
+
+module.exports = { createPatient, updatePatient };

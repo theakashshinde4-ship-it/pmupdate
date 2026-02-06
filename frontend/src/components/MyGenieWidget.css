@@ -1,0 +1,18 @@
+.mygenie-widget{background:#fff;border-radius:8px;padding:12px;box-shadow:0 4px 12px rgba(0,0,0,0.06)}
+.widget-header{display:flex;justify-content:space-between;align-items:center}
+.widget-header h4{margin:0;font-size:16px}
+.widget-header .muted{margin:4px 0 0;color:#666;font-size:12px}
+.widget-actions .btn-open{background:#efefef;border:0;padding:6px 10px;border-radius:6px;cursor:pointer}
+.widget-body{margin-top:12px}
+.loader{padding:12px;color:#444}
+
+/* Modal styles */
+.mygenie-modal .modal-backdrop{position:absolute;inset:0}
+.mygenie-modal .modal-content{position:relative}
+
+@media (max-width:640px){
+	.mygenie-widget{padding:10px}
+	.widget-header h4{font-size:14px}
+	.widget-header .muted{font-size:11px}
+	.widget-actions{margin-top:8px}
+}

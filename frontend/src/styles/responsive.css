@@ -1,0 +1,418 @@
+/**
+ * Mobile Responsiveness Guidelines & CSS
+ * Week 3: Mobile-First Implementation
+ * 
+ * Breakpoints:
+ * - Mobile: 320px - 479px (iPhone SE - iPhone 11)
+ * - Tablet: 480px - 1023px (iPad)
+ * - Desktop: 1024px+ (Desktop & iPad Pro)
+ */
+
+/* ============================================
+   BASE - MOBILE FIRST (320px+)
+   ============================================ */
+
+:root {
+  --bp-xs: 320px;   /* iPhone SE */
+  --bp-sm: 480px;   /* iPhone 6/7/8 */
+  --bp-md: 768px;   /* iPad */
+  --bp-lg: 1024px;  /* Desktop & iPad Pro */
+  --bp-xl: 1280px;  /* Large Desktop */
+  --bp-2xl: 1536px; /* Extra Large Desktop */
+}
+
+/* ============================================
+   RESPONSIVE CONTAINERS
+   ============================================ */
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+/* Mobile: 320px */
+@media (min-width: 320px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+/* Tablet: 768px */
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+/* Desktop: 1024px */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+/* Large Desktop: 1280px */
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1120px;
+  }
+}
+
+/* ============================================
+   TYPOGRAPHY - RESPONSIVE
+   ============================================ */
+
+h1, .heading-1 {
+  font-size: 24px; /* Mobile */
+}
+
+@media (min-width: 768px) {
+  h1, .heading-1 {
+    font-size: 32px; /* Tablet */
+  }
+}
+
+@media (min-width: 1024px) {
+  h1, .heading-1 {
+    font-size: 36px; /* Desktop */
+  }
+}
+
+h2, .heading-2 {
+  font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  h2, .heading-2 {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1024px) {
+  h2, .heading-2 {
+    font-size: 30px;
+  }
+}
+
+/* ============================================
+   TOUCH TARGETS - WCAG AA
+   ============================================ */
+
+/* Minimum 44x44px for touch targets */
+button, a[role="button"], input[type="button"], input[type="submit"] {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-3) var(--space-4);
+}
+
+/* Mobile: Increase touch target for easier interaction */
+@media (max-width: 768px) {
+  button, a[role="button"], input[type="button"], input[type="submit"] {
+    min-height: 48px;
+    padding: var(--space-4) var(--space-5);
+  }
+}
+
+/* ============================================
+   NAVIGATION - RESPONSIVE
+   ============================================ */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4);
+  background-color: var(--color-bg-secondary);
+}
+
+/* Mobile menu */
+@media (max-width: 768px) {
+  .navbar__menu {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    flex-direction: column;
+    background-color: var(--color-bg-primary);
+    z-index: var(--z-modal);
+    padding: var(--space-4);
+  }
+
+  .navbar__menu--open {
+    display: flex;
+  }
+
+  .navbar__hamburger {
+    display: block;
+  }
+}
+
+/* Desktop menu */
+@media (min-width: 769px) {
+  .navbar__menu {
+    display: flex;
+    gap: var(--space-6);
+  }
+
+  .navbar__hamburger {
+    display: none;
+  }
+}
+
+/* ============================================
+   LAYOUT - RESPONSIVE GRID
+   ============================================ */
+
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* Mobile: 1 column */
+@media (max-width: 479px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Small tablet: 2 columns */
+@media (min-width: 480px) and (max-width: 767px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablet: 3 columns */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop: 4 columns */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   SIDEBAR LAYOUT - RESPONSIVE
+   ============================================ */
+
+.sidebar-layout {
+  display: grid;
+  gap: var(--space-6);
+}
+
+/* Mobile: Stacked layout */
+@media (max-width: 767px) {
+  .sidebar-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    order: -1; /* Sidebar appears first on mobile */
+  }
+}
+
+/* Tablet & Desktop: Sidebar layout */
+@media (min-width: 768px) {
+  .sidebar-layout {
+    grid-template-columns: 250px 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sidebar-layout {
+    grid-template-columns: 300px 1fr;
+  }
+}
+
+/* ============================================
+   IMAGES - RESPONSIVE
+   ============================================ */
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive image srcset example:
+   <img src="image-320w.png" 
+        srcset="image-320w.png 320w,
+                image-640w.png 640w,
+                image-1280w.png 1280w"
+        sizes="(max-width: 480px) 100vw,
+               (max-width: 768px) 80vw,
+               (max-width: 1024px) 70vw,
+               50vw"
+        alt="Description" />
+*/
+
+/* ============================================
+   FORMS - RESPONSIVE
+   ============================================ */
+
+.form-group {
+  margin-bottom: var(--space-6);
+}
+
+.form-row {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* Mobile: 1 column */
+@media (max-width: 767px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Tablet & Desktop: 2 columns */
+@media (min-width: 768px) {
+  .form-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-size: 16px; /* Prevents zoom on iOS */
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-sans);
+}
+
+/* ============================================
+   TABLE - RESPONSIVE (Mobile: Card View)
+   ============================================ */
+
+/* Desktop: Traditional table */
+@media (min-width: 768px) {
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  thead {
+    background-color: var(--color-bg-tertiary);
+  }
+}
+
+/* Mobile: Card view */
+@media (max-width: 767px) {
+  table {
+    display: block;
+    border: 0;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody {
+    display: block;
+  }
+
+  tr {
+    display: block;
+    margin-bottom: var(--space-6);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-4);
+  }
+
+  td {
+    display: block;
+    padding: var(--space-2) 0;
+    text-align: right;
+  }
+
+  td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES - RESPONSIVE VISIBILITY
+   ============================================ */
+
+/* Hide on mobile */
+@media (max-width: 767px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Hide on tablet/desktop */
+@media (min-width: 768px) {
+  .show-mobile-only {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   HORIZONTAL SCROLLING PREVENTION
+   ============================================ */
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .no-print, .navbar, .sidebar {
+    display: none !important;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
+
+/* ============================================
+   LANDSCAPE MODE
+   ============================================ */
+
+@media (max-height: 500px) and (orientation: landscape) {
+  /* Reduce padding on landscape mobile */
+  body {
+    padding: var(--space-2);
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+}
